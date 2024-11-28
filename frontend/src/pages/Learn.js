@@ -6,7 +6,7 @@ import Header from './Header';
 
 export default function Learn() {
   const [loggedInUser, setLoggedInUser] = useState('');
-  const [currentLevel, setCurrentLevel] = useState('basic'); // Default level is 'basic'
+  const [currentLevel, setCurrentLevel] = useState('basic'); 
   const [questionIndex, setQuestionIndex] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [userAnswer, setUserAnswer] = useState('');
