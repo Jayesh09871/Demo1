@@ -65,7 +65,7 @@ const LanguageSelect = () => {
         <h1 
     className="text-3xl text-white mt-2 text-center font-bold animate-pulse 
                glow-text">
-    Which language you want to learn?
+    Which language do you now ?
 </h1>
 
         <div className="flex justify-center items-center min-h-screen bg-gray-800 p-4">
