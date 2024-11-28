@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify'; // Import toast
-import { ToastContainer } from 'react-toastify'; // Import ToastContainer
-import {useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify'; // Import toast
 
 const LanguageSelect = () => {
     const [language, setLanguage] = useState('en'); // default to 'en'
@@ -30,7 +29,7 @@ const LanguageSelect = () => {
             if (response.data.success) {
                 toast.success('Language updated successfully!');
                 setTimeout(() => {
-                    navigate('/Dashboard');
+                    navigate('/home');
                   }, 1000);
             } else {
                 toast.error('Failed to update language.');
