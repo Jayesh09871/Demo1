@@ -629,12 +629,15 @@ export default function Learn() {
       setScore(score + 1);
     }
     setSelectedOption("");
+  
     if (currentQuestionIndex + 1 < questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       setIsCompleted(true);
+      localStorage.setItem("quizScore", score + (selectedOption === questions[currentQuestionIndex].answer ? 1 : 0));
     }
   };
+  
 
   const handleRetry = () => {
     setLevel("");
