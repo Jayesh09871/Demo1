@@ -1,16 +1,26 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify'; // Import toast
 
 const LanguageSelect = () => {
     const [language, setLanguage] = useState('en'); // default to 'en'
 
-    
     const navigate = useNavigate();
+
+    // Load language from localStorage on component mount
+    useEffect(() => {
+        const storedLanguage = localStorage.getItem('selectedLanguage');
+        if (storedLanguage) {
+            setLanguage(storedLanguage);
+        }
+    }, []);
 
     const handleLanguageChange = async (selectedLanguage) => {
         setLanguage(selectedLanguage);
+
+        // Save the selected language to localStorage
+        localStorage.setItem('selectedLanguage', selectedLanguage);
 
         try {
             const token = localStorage.getItem('token');
@@ -30,7 +40,7 @@ const LanguageSelect = () => {
                 toast.success('Language updated successfully!');
                 setTimeout(() => {
                     navigate('/home');
-                  }, 1000);
+                }, 1000);
             } else {
                 toast.error('Failed to update language.');
             }
@@ -38,7 +48,6 @@ const LanguageSelect = () => {
             console.error('Error updating language:', err);
             toast.error('Error updating language.');
         }
-        
     };
 
     // Add a unique image URL for each language
@@ -52,6 +61,13 @@ const LanguageSelect = () => {
     ];
 
     return (
+        <div className='justify-center items-center min-h-screen bg-gray-800 p-4'>
+        <h1 
+    className="text-3xl text-white mt-2 text-center font-bold animate-pulse 
+               glow-text">
+    Which language you want to learn?
+</h1>
+
         <div className="flex justify-center items-center min-h-screen bg-gray-800 p-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {languages.map((lang) => (
@@ -75,7 +91,7 @@ const LanguageSelect = () => {
                                 className="relative w-60 transition-all duration-500 group-hover:scale-0 group-hover:transition-delay-0s"
                             >
                                 <img
-                                    src={lang.image} // Use the unique image for each language
+                                    src={lang.image}
                                     alt={lang.name}
                                     className="w-full h-full object-cover rounded-full"
                                 />
@@ -97,7 +113,10 @@ const LanguageSelect = () => {
             </div>
             <ToastContainer /> {/* Add the ToastContainer here */}
         </div>
+        </div>
     );
 };
 
 export default LanguageSelect;
+
+// selectedLanguage	en
