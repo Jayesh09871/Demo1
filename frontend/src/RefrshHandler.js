@@ -13,7 +13,7 @@ function RefrshHandler({ setIsAuthenticated }) {
                 location.pathname === '/signup' ||
                 location.pathname === '//LanguageSelect' 
             ) {
-                navigate('/home', { replace: false });
+                navigate('/learn', { replace: false });
             }
         }
     }, [location, navigate, setIsAuthenticated])

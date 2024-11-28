@@ -39,7 +39,7 @@ const LanguageSelect = () => {
             if (response.data.success) {
                 toast.success('Language updated successfully!');
                 setTimeout(() => {
-                    navigate('/home');
+                    navigate('/learn');
                 }, 1000);
             } else {
                 toast.error('Failed to update language.');

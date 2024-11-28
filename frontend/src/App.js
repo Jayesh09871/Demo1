@@ -29,7 +29,7 @@ function App() {
       {sidebarRoutes.includes(location.pathname) && <Sidebar/>}
 
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <Navigate to="/login" />} />
+        <Route path="/" element={isAuthenticated ? <Navigate to="/learn" /> : <Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/LanguageSelect" element={<PrivateRoute element={<LanguageSelect />} />} />
