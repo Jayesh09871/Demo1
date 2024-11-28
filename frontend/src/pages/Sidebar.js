@@ -12,13 +12,14 @@ const Sidebar = () => {
   return (
     <div className="h-screen w-64 bg-black text-white fixed border-r border-gray-500">
       <nav className="flex flex-col p-4 space-y-4">
-        <div className="flex items-center justify-center">
-          <div className="w-24 h-24 rounded-full overflow-hidden">
+      <div className="flex items-center justify-center">
+          <div className="w-16 h-16 overflow-hidden">
             <img
-              src="https://storage.googleapis.com/a1aa/image/fkBnqso0SqX5BSLn7gsARWoraL89LXe9We2fActiIeV1I7reE.jpg"
+              src="https://cdn-icons-png.flaticon.com/128/18046/18046993.png"
               className="w-full h-full "
             />
           </div>
+
         </div>
         <NavLink
           to="/learn"
