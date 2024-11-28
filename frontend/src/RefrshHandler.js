@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function RefrshHandler({ setIsAuthenticated }) {
     const location = useLocation();
@@ -13,7 +13,7 @@ function RefrshHandler({ setIsAuthenticated }) {
                 location.pathname === '/signup' ||
                 location.pathname === '//LanguageSelect' 
             ) {
-                navigate('/Dashboard', { replace: false });
+                navigate('/home', { replace: false });
             }
         }
     }, [location, navigate, setIsAuthenticated])
