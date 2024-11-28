@@ -5,7 +5,7 @@ import { handleSuccess } from "../utils";
 import Header from "./Header";
 
 const questionsData = {
-  en: {
+  English: {
     Basic: [
       {
         question: "Which word is a noun in the sentence: 'The dog is barking loudly'?",
@@ -124,7 +124,7 @@ const questionsData = {
     ],
   },
   
-  hi: {
+  Hindi: {
     Basic: [
       {
         question: "हिंदी वर्णमाला में कितने स्वर होते हैं?",
@@ -212,7 +212,7 @@ const questionsData = {
       },
     ],
   },
-  fr: {
+  French: {
     Basic: [
       {
         question: "Quel est le féminin de 'roi' ?",
@@ -315,7 +315,7 @@ const questionsData = {
       },
     ],
   },
-  sp: {
+  Spanish: {
     Basic: [
       {
         question: "¿Cómo se dice 'hello' en español?",
@@ -403,7 +403,7 @@ const questionsData = {
       },
     ],
   },
-  ge: {
+  German: {
     Basic: [
       {
         question: "Wie sagt man 'hello' auf Deutsch?",
@@ -496,7 +496,7 @@ const questionsData = {
       },
     ],
   },
-  ja: {
+  Japanese: {
     Basic: [
       {
         question: "「こんにちは」の意味は何ですか？",
@@ -648,106 +648,118 @@ export default function Learn() {
     setIsCompleted(false);
   };
 
-  return (
-    <div className="h-screen flex flex-col bg-gray-100">
-      <Header username={loggedInUser} handleLogout={handleLogout} />
 
-      <main className="flex-grow p-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl font-bold text-gray-800">Learn</h1>
-          {!level && !isCompleted && (
-            <>
-              <p className="mt-4 text-lg text-gray-600">
-                Select a level to start learning:
-              </p>
-              <div className="mt-6 flex justify-center space-x-4">
-                {["Basic", "Intermediate", "Advanced"].map((lvl) => (
-                  <button
-                    key={lvl}
-                    onClick={() => startLevel(lvl)}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                  >
-                    {lvl}
-                  </button>
-                ))}
-              </div>
-            </>
-          )}
-
-          {level && !isCompleted && questions.length > 0 && (
-            <div className="mt-8">
-              <h2 className="text-2xl font-semibold text-gray-800">
-                Level: {level}
-              </h2>
-              <div className="mt-4 p-4 bg-white shadow-md rounded-lg">
-                <p className="text-lg font-medium">
-                  Question {currentQuestionIndex + 1}/{questions.length}:{" "}
-                  {questions[currentQuestionIndex].question}
+    return (
+      <div className="h-screen flex flex-col bg-black text-gray-100">
+          <header className="ml-[16rem] border-b border-gray-500
+ fixed bg-black text-white p-4 flex justify-between items-center shadow-md w-5/6 z-10 top-0 left-0">
+          <h1 className="text-xl font-bold ml-[2rem] text-green-500"></h1>
+          <div className="flex items-center space-x-4">
+            <span className="text-xl font-bold text-green-500">Welcome, {loggedInUser}</span>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
+            >
+              Logout
+            </button>
+          </div>
+        </header>
+  
+        <main className="flex-grow p-8">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* <h1 className="text-4xl font-bold text-blue-400">Learn</h1> */}
+            {!level && !isCompleted && (
+              <>
+                <p className="mt-[6rem] text-lg text-gray-400 ml-32">
+                  Select a level to start learning:
                 </p>
-                <div className="mt-4 space-y-2">
-                  {questions[currentQuestionIndex].options.map(
-                    (option, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleOptionSelect(option)}
-                        className={`w-full px-4 py-2 text-left border rounded-lg ${
-                          selectedOption === option
-                            ? "bg-blue-500 text-white"
-                            : "bg-gray-200"
-                        }`}
-                      >
-                        {option}
-                      </button>
-                    )
-                  )}
+                <div className="mt-6 flex justify-center space-x-4 ml-32">
+                  {["Basic", "Intermediate", "Advanced"].map((lvl) => (
+                    <button
+                      key={lvl}
+                      onClick={() => startLevel(lvl)}
+                      className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
+                    >
+                      {lvl}
+                    </button>
+                  ))}
                 </div>
-                <button
-                  onClick={handleNextQuestion}
-                  disabled={!selectedOption}
-                  className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-                >
-                  {currentQuestionIndex + 1 === questions.length
-                    ? "Submit"
-                    : "Next"}
-                </button>
+              </>
+            )}
+  
+            {level && !isCompleted && questions.length > 0 && (
+              <div className="mt-[6rem] ml-[11rem]">
+                <h2 className="text-2xl font-semibold text-blue-300">
+                  Level: {level}
+                </h2>
+                <div className="mt-4 p-6 bg-gray-800 shadow-lg rounded-lg ">
+                  <p className="text-lg font-medium">
+                    Question {currentQuestionIndex + 1} : {"  "}
+                    {questions[currentQuestionIndex].question}
+                  </p>
+                  <div className="mt-4 space-y-2">
+                    {questions[currentQuestionIndex].options.map(
+                      (option, index) => (
+                        <button
+                          key={index}
+                          onClick={() => handleOptionSelect(option)}
+                          className={`w-full px-4 py-2 text-left border rounded-lg ${
+                            selectedOption === option
+                              ? "bg-blue-500 text-white border-blue-600"
+                              : "bg-gray-700 border-gray-600"
+                          } hover:bg-blue-400 transition`}
+                        >
+                          {option}
+                        </button>
+                      )
+                    )}
+                  </div>
+                  <button
+                    onClick={handleNextQuestion}
+                    disabled={!selectedOption}
+                    className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                  >
+                    {currentQuestionIndex + 1 === questions.length
+                      ? "Submit"
+                      : "Next"}
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-
-          {isCompleted && (
-            <div className="mt-8">
-              <h2 className="text-2xl font-semibold text-gray-800">
-                Quiz Completed!
-              </h2>
-              <p className="mt-4 text-lg">
-                Your score: <span className="font-bold">{score}</span>/
-                {questions.length}
-              </p>
-              <div className="mt-6 space-x-4">
-                <button
-                  onClick={handleRetry}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-                >
-                  Reattempt
-                </button>
-                <button
-                  onClick={() => {
-                    setLevel("");
-                    setQuestions([]);
-                    setCurrentQuestionIndex(0);
-                    setIsCompleted(false);
-                    setSelectedOption("");
-                  }}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
-                >
-                  Choose Another Level
-                </button>
+            )}
+            {isCompleted && (
+              <div className="mt-[10rem] ml-[10rem]">
+                <h2 className="text-2xl font-semibold text-green-400">
+                  Quiz Completed!
+                </h2>
+                <p className="mt-4 text-lg">
+                  Your score:{" "}
+                  <span className="font-bold text-yellow-400">{score}</span>/
+                  {questions.length}
+                </p>
+                <div className="mt-6 space-x-4">
+                  <button
+                    onClick={handleRetry}
+                    className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition transform hover:scale-105"
+                  >
+                    Reattempt
+                  </button>
+                  <button
+                    onClick={() => {
+                      setLevel("");
+                      setQuestions([]);
+                      setCurrentQuestionIndex(0);
+                      setIsCompleted(false);
+                      setSelectedOption("");
+                    }}
+                    className="px-6 py-3 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition"
+                  >
+                    Choose Another Level
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      </main>
-      <ToastContainer />
-    </div>
-  );
-}
+            )}
+          </div>
+        </main>
+      </div>
+    );
+  }  

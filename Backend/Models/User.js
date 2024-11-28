@@ -17,7 +17,7 @@ const UserSchema = new Schema({
     },
     language: { // Add the language preference field
         type: String,
-        default: 'en',  // Default language is English
+        default: 'English',  // Default language is English
     }
 });
 
