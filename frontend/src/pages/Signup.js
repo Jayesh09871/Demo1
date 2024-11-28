@@ -26,7 +26,7 @@ function Signup() {
       return handleError('Name, email, and password are required');
     }
     try {
-      const url = `http://localhost:3005/auth/signup`;
+      const url = `https://backend-uuye.onrender.com/auth/signup`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {

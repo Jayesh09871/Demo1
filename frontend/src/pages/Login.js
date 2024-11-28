@@ -25,7 +25,7 @@ function Login() {
       return handleError('Email and password are required');
     }
     try {
-      const url = `http://localhost:3005/auth/login`;
+      const url = `https://backend-uuye.onrender.com/auth/login`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {

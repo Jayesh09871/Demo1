@@ -25,7 +25,7 @@ const LanguageSelect = () => {
         try {
             const token = localStorage.getItem('token');
             console.log('JWT Token:', token);  // Debug the token
-            const response = await axios.post('http://localhost:3005/auth/language', 
+            const response = await axios.post('https://backend-uuye.onrender.com/auth/language', 
                 { language: selectedLanguage }, 
                 {
                     headers: {
