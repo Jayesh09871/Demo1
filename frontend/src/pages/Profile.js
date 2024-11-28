@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { handleSuccess } from "../utils";
 import Sidebar from "./Sidebar";
-import { Edit } from 'react-feather';
+import { Edit } from "react-feather";
 
 const Profile = () => {
   const [loggedInUser, setLoggedInUser] = useState("");
@@ -13,17 +13,27 @@ const Profile = () => {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [languageFlag, setLanguageFlag] = useState("");
+
+  const [inviteModalOpen, setInviteModalOpen] = useState(false); //
+
   const navigate = useNavigate();
 
-  const languageFlags = {
-    en: 'https://img.freepik.com/free-psd/american-flag_23-2150587468.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid',
-    hi: 'https://img.freepik.com/free-photo/india-republic-day-celebration-digital-art-with-flag_23-2151070781.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid',
-    fr: 'https://img.freepik.com/free-photo/french-flag-white_144627-24628.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid',
-    sp: 'https://img.freepik.com/free-photo/spanish-flag-white_144627-24632.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid',
-    ge: 'https://img.freepik.com/free-photo/wavy-flag-germany-texture-background-generative-ai_169016-29913.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid',
-    ja: 'https://img.freepik.com/free-photo/japan-national-flag-isolated-3d-white-background_1379-394.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid',
-  };
+  const sharableLink = "https://demo1-0zpe.onrender.com/profile"; ///
 
+  const languageFlags = {
+    English:
+      "https://img.freepik.com/free-psd/american-flag_23-2150587468.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid",
+    Hindi:
+      "https://img.freepik.com/free-photo/india-republic-day-celebration-digital-art-with-flag_23-2151070781.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid",
+    French:
+      "https://img.freepik.com/free-photo/french-flag-white_144627-24628.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid",
+    Spanish:
+      "https://img.freepik.com/free-photo/spanish-flag-white_144627-24632.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid",
+    German:
+      "https://img.freepik.com/free-photo/wavy-flag-germany-texture-background-generative-ai_169016-29913.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid",
+    Japanese:
+      "https://img.freepik.com/free-photo/japan-national-flag-isolated-3d-white-background_1379-394.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid",
+  };
 
   useEffect(() => {
     const username = localStorage.getItem("loggedInUser");
@@ -54,16 +64,27 @@ const Profile = () => {
     setIsModalOpen(false);
   };
 
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(sharableLink);
+    toast.success("Link copied to clipboard!");
+  };
+
   return (
     <div className="flex bg-black text-white min-h-screen">
       <Sidebar />
       <div className="flex-1 ml-64">
         {/* Header */}
-        <header className="ml-[16rem] border-b border-gray-500
- fixed bg-black text-white p-4 flex justify-between items-center shadow-md w-5/6 z-10 top-0 left-0">
-          <h1 className="text-xl font-bold ml-[2rem] text-green-500">Profile</h1>
+        <header
+          className="ml-[16rem] border-b border-gray-500
+ fixed bg-black text-white p-4 flex justify-between items-center shadow-md w-5/6 z-10 top-0 left-0"
+        >
+          <h1 className="text-xl font-bold ml-[2rem] text-green-500">
+            Profile
+          </h1>
           <div className="flex items-center space-x-4">
-            <span className="text-xl font-bold text-green-500">Welcome, {loggedInUser}</span>
+            <span className="text-xl font-bold text-green-500">
+              Welcome, {loggedInUser}
+            </span>
             <button
               onClick={handleLogout}
               className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
@@ -72,7 +93,7 @@ const Profile = () => {
             </button>
           </div>
         </header>
-  
+
         {/* Main Profile Content */}
         <main className="p-8 mt-16 overflow-y-auto">
           <div className="bg-red-600 rounded-lg p-4 mx-auto relative w-fit">
@@ -85,47 +106,69 @@ const Profile = () => {
               onClick={() => setIsModalOpen(true)}
               className="absolute top-1 right-2 bg-gray-700 p-1 rounded-full shadow hover:bg-gray-600"
             >
-              <Edit className="w-5 h-4 text-red-500" /> {/* Feather Edit icon */}
+              <Edit className="w-5 h-4 text-red-500" />{" "}
+              {/* Feather Edit icon */}
             </button>
           </div>
-  
+
           {/* Image Selection Modal */}
           {isModalOpen && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-white p-6 rounded-lg ml-[14rem]">
-                <h3 className="text-lg font-bold mb-4">Select a new profile image</h3>
+                <h3 className="text-lg font-bold mb-4">
+                  Select a new profile image
+                </h3>
                 <div className="flex space-x-4">
                   <img
                     src="https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869153.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
                     alt="Option 1"
                     className="w-24 h-24 cursor-pointer"
-                    onClick={() => handleImageChange("https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869153.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid")}
+                    onClick={() =>
+                      handleImageChange(
+                        "https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869153.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
+                      )
+                    }
                   />
                   <img
                     src="https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869145.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
                     alt="Option 2"
                     className="w-24 h-24 cursor-pointer"
-                    onClick={() => handleImageChange("https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869145.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid")}
+                    onClick={() =>
+                      handleImageChange(
+                        "https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869145.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
+                      )
+                    }
                   />
                   <img
                     src="https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869159.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
                     alt="Option 3"
                     className="w-24 h-24 cursor-pointer"
-                    onClick={() => handleImageChange("https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869159.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid")}
+                    onClick={() =>
+                      handleImageChange(
+                        "https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869159.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
+                      )
+                    }
                   />
                   <img
                     src="https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303045.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
                     alt="Option 4"
                     className="w-24 h-24 cursor-pointer"
-                    onClick={() => handleImageChange("https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303045.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid")}
+                    onClick={() =>
+                      handleImageChange(
+                        "https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303045.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
+                      )
+                    }
                   />
-                      <img
+                  <img
                     src="https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303048.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
                     alt="Option 4"
                     className="w-24 h-24 cursor-pointer"
-                    onClick={() => handleImageChange("https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303048.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid")}
+                    onClick={() =>
+                      handleImageChange(
+                        "https://img.freepik.com/free-psd/3d-illustration-with-online-avatar_23-2151303048.jpg?uid=R119405142&ga=GA1.1.1995806244.1728212278&semt=ais_hybrid"
+                      )
+                    }
                   />
-               
                 </div>
                 <button
                   onClick={() => setIsModalOpen(false)}
@@ -136,7 +179,7 @@ const Profile = () => {
               </div>
             </div>
           )}
-  
+
           <div className="mt-4 text-center">
             <h1 className="text-2xl font-bold">{loggedInUser}</h1>
             <p className="text-gray-400">{loggedInUser}132560</p>
@@ -150,13 +193,13 @@ const Profile = () => {
               </a>
             </div>
           </div>
-  
+
           <div className="mt-8 flex items-center justify-center">
             <h2 className="text-xl font-semibold mr-4">Selected Language:</h2>
             <img src={languageFlag} alt="Language flag" className="w-12 h-8" />
           </div>
           <hr className="my-4 border-gray-700" />
-  
+
           {/* Statistics and Friends */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -168,8 +211,13 @@ const Profile = () => {
                   { icon: "fa-trophy", label: "Current league", value: "None" },
                   { icon: "fa-medal", label: "Top 3 finishes", value: 0 },
                 ].map((stat, idx) => (
-                  <div key={idx} className="bg-gray-900 p-4 rounded-lg flex flex-col items-center">
-                    <i className={`fas ${stat.icon} text-green-500 text-2xl`}></i>
+                  <div
+                    key={idx}
+                    className="bg-gray-900 p-4 rounded-lg flex flex-col items-center"
+                  >
+                    <i
+                      className={`fas ${stat.icon} text-green-500 text-2xl`}
+                    ></i>
                     <p className="text-green-400 mt-2">{stat.value}</p>
                     <p className="text-gray-400">{stat.label}</p>
                   </div>
@@ -189,7 +237,8 @@ const Profile = () => {
                     className="w-28 h-28"
                   />
                   <p className="text-gray-400">
-                    Learning is more fun and effective when you connect with others.
+                    Learning is more fun and effective when you connect with
+                    others.
                   </p>
                 </div>
               </div>
@@ -202,22 +251,52 @@ const Profile = () => {
                       Find friends
                     </a>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  {/* <div className="flex items-center space-x-2">
                     <i className="fas fa-envelope text-green-500"></i>
                     <a href="#" className="text-gray-400 hover:text-green-500">
                       Invite friends
                     </a>
+                  </div> */}
+                  <div className="flex items-center space-x-2">
+                    <i className="fas fa-envelope text-green-500"></i>
+                    <p
+                      onClick={() => setInviteModalOpen(true)}
+                      className="text-gray-400 hover:text-green-500"
+                    >
+                      Invite Friends
+                    </p>
                   </div>
+                  {inviteModalOpen && (
+                    <div className="fixed  inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                      <div className="bg-white ml-[12rem] p-6 rounded-lg text-black">
+                        <h3 className="text-lg font-bold mb-4">
+                          Invite Your Friends
+                        </h3>
+                        <p className="mb-4">{sharableLink}</p>
+                        <button
+                          onClick={handleCopyLink}
+                          className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 mr-4"
+                        >
+                          Copy Link
+                        </button>
+                        <button
+                          onClick={() => setInviteModalOpen(false)}
+                          className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </main>
-  
+
         <ToastContainer />
       </div>
     </div>
   );
-}  
+};
 export default Profile;
-
